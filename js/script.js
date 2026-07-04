@@ -6,12 +6,15 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof AOS !== 'undefined') {
+        // Keep AOS enabled on mobile. Disabling it while the AOS stylesheet is loaded
+        // can leave [data-aos] elements at opacity: 0 on real phones, which hides
+        // the Moments photos, Amazing cards, and Little Things cards.
         AOS.init({
-            duration: 1000,
+            duration: window.innerWidth <= 768 ? 650 : 1000,
             easing: 'ease-out-cubic',
             once: true,
-            offset: 80,
-            disable: 'mobile'
+            offset: window.innerWidth <= 768 ? 20 : 80,
+            disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
         });
     }
 

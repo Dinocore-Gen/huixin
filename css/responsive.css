@@ -94,16 +94,42 @@
     .section-subtitle { font-size: 0.9rem; }
     .section-subtitle-cn { font-size: 0.8rem; }
 
-    /* GALLERY - 2 columns on mobile */
-    .gallery-item {
-        width: calc(50% - 0.8rem);
-        height: 240px;
+    /* MOBILE VISIBILITY SAFETY NET
+       AOS CSS can hide [data-aos] elements on phones before JS marks them animated.
+       These sections must always be visible on non-desktop/mobile mode. */
+    .gallery-grid [data-aos],
+    .amazing-grid [data-aos],
+    .timeline [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
     }
 
-    /* AMAZING CARDS - 2 columns on mobile */
+    /* GALLERY - stable mobile layout */
+    .gallery-grid {
+        gap: 1rem;
+        align-items: stretch;
+    }
+    .gallery-item {
+        width: calc(50% - 0.5rem);
+        height: auto;
+        aspect-ratio: 3 / 4;
+        min-width: 0;
+        flex: 0 0 calc(50% - 0.5rem);
+    }
+
+    /* AMAZING CARDS - stable mobile layout */
+    .amazing-grid {
+        gap: 1rem;
+        align-items: stretch;
+    }
     .amazing-card {
-        width: calc(50% - 1rem);
+        width: calc(50% - 0.5rem);
         height: 260px;
+        min-width: 0;
+        flex: 0 0 calc(50% - 0.5rem);
+        touch-action: manipulation;
     }
     .card-icon { width: 55px; height: 55px; font-size: 1.8rem; margin-bottom: 0.8rem; }
     .card-front-title { font-size: 1rem; }
@@ -201,10 +227,16 @@
     .section-label { font-size: 1.1rem; }
     .section-label-cn { font-size: 0.85rem; }
 
-    /* Gallery - smaller on very small phones */
+    /* Gallery - one readable column on phones */
+    .gallery-grid { gap: 1rem; }
     .gallery-item {
-        width: calc(50% - 0.5rem);
-        height: 200px;
+        width: 100%;
+        max-width: 360px;
+        height: auto;
+        aspect-ratio: 3 / 4;
+        flex: 0 0 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
     .gallery-item-overlay { padding: 0.6rem; }
     .gallery-item-number { font-size: 0.85rem; }
@@ -212,10 +244,15 @@
     .gallery-item-title-cn { font-size: 0.6rem; }
     .gallery-item-hint { font-size: 0.6rem; }
 
-    /* Amazing cards - smaller on very small phones */
+    /* Amazing cards - one readable column on phones */
+    .amazing-grid { gap: 1rem; }
     .amazing-card {
-        width: calc(50% - 0.6rem);
-        height: 220px;
+        width: 100%;
+        max-width: 360px;
+        height: 235px;
+        flex: 0 0 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
     .card-icon { width: 45px; height: 45px; font-size: 1.5rem; margin-bottom: 0.6rem; }
     .card-front-title { font-size: 0.85rem; }
@@ -285,16 +322,18 @@
 }
 
 @media (max-width: 360px) {
-    /* Even smaller phones - 1 column for gallery */
+    /* Even smaller phones - keep important content visible/readable */
     .gallery-item {
         width: 100%;
-        height: 320px;
+        height: auto;
+        aspect-ratio: 3 / 4;
+        flex-basis: 100%;
     }
     
-    /* Amazing cards - still 2 columns but smaller */
     .amazing-card {
-        width: calc(50% - 0.5rem);
-        height: 200px;
+        width: 100%;
+        height: 230px;
+        flex-basis: 100%;
     }
     .card-icon { width: 40px; height: 40px; font-size: 1.3rem; }
     .card-front-title { font-size: 0.8rem; }
@@ -319,4 +358,19 @@
         transition-duration: 0.01ms !important;
     }
     html { scroll-behavior: auto; }
+}
+
+
+/* Final mobile content visibility fallback: prevents external AOS CSS from hiding key cards/photos. */
+@media (max-width: 768px), (pointer: coarse) {
+    #galleryGrid .gallery-item,
+    #amazingGrid .amazing-card,
+    #timeline .timeline-item,
+    #galleryGrid [data-aos],
+    #amazingGrid [data-aos],
+    #timeline [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+    }
 }
