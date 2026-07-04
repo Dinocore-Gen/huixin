@@ -63,6 +63,7 @@ html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -73,6 +74,7 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     line-height: 1.6;
+    -webkit-overflow-scrolling: touch;
 }
 
 img { max-width: 100%; display: block; }
@@ -975,7 +977,7 @@ body:hover .cursor-glow { opacity: 1; }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1.5rem;
 }
 
@@ -983,11 +985,22 @@ body:hover .cursor-glow { opacity: 1; }
     position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    aspect-ratio: 3/4;
     cursor: pointer;
     box-shadow: var(--shadow-sm);
     transition: all 0.5s var(--ease-out);
     background: var(--pink-100);
+    /* Fallback for browsers that don't support aspect-ratio */
+    padding-top: 133.33%;
+    height: 0;
+}
+
+/* Modern browsers with aspect-ratio support */
+@supports (aspect-ratio: 3/4) {
+    .gallery-item {
+        padding-top: 0;
+        height: auto;
+        aspect-ratio: 3 / 4;
+    }
 }
 
 .gallery-item:hover {
@@ -995,7 +1008,16 @@ body:hover .cursor-glow { opacity: 1; }
     box-shadow: var(--shadow-lg);
 }
 
+/* Active state for mobile tap feedback */
+.gallery-item:active {
+    transform: scale(0.97);
+}
+
 .gallery-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1007,14 +1029,20 @@ body:hover .cursor-glow { opacity: 1; }
 .gallery-item::before {
     content: '';
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: linear-gradient(180deg, transparent 40%, rgba(74, 44, 61, 0.5) 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
-    z-index: 1;
+    pointer-events: none;
 }
 
 .gallery-item:hover::before { opacity: 1; }
+
+/* Show gradient on mobile via a class toggled by JS */
+.gallery-item.show-overlay::before { opacity: 1; }
 
 .gallery-item-overlay {
     position: absolute;
@@ -1025,10 +1053,13 @@ body:hover .cursor-glow { opacity: 1; }
     color: white;
     transform: translateY(100%);
     transition: transform 0.5s var(--ease-out);
-    z-index: 2;
+    pointer-events: none;
 }
 
 .gallery-item:hover .gallery-item-overlay { transform: translateY(0); }
+
+/* Mobile: show overlay on tap */
+.gallery-item.show-overlay .gallery-item-overlay { transform: translateY(0); }
 
 .gallery-item-number {
     font-family: var(--font-script);
@@ -1589,6 +1620,7 @@ body:hover .cursor-glow { opacity: 1; }
 .footer {
     background: var(--grad-soft);
     padding: 3rem 2rem;
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
     text-align: center;
     border-top: 1px solid rgba(255, 196, 214, 0.4);
 }

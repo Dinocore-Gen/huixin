@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTimeline();
     initLetterTypewriter();
     initCTAButton();
+    initMobileGalleryTap();
 });
 
 /* ---------- LOADING ---------- */
@@ -487,6 +488,28 @@ function initCTAButton() {
         const special = document.getElementById('special');
         if (special) special.scrollIntoView({ behavior: 'smooth' });
     });
+}
+
+/* ---------- MOBILE GALLERY TAP ---------- */
+function initMobileGalleryTap() {
+    if (!window.matchMedia('(pointer: coarse)').matches) return;
+
+    document.addEventListener('click', (e) => {
+        const item = e.target.closest('.gallery-item');
+        if (!item) {
+            document.querySelectorAll('.gallery-item.show-overlay')
+                .forEach(el => el.classList.remove('show-overlay'));
+            return;
+        }
+
+        const wasShown = item.classList.contains('show-overlay');
+        document.querySelectorAll('.gallery-item.show-overlay')
+            .forEach(el => el.classList.remove('show-overlay'));
+
+        if (!wasShown) {
+            item.classList.add('show-overlay');
+        }
+    }, { passive: true });
 }
 
 /* ---------- GSAP PARALLAX ---------- */
