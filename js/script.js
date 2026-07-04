@@ -97,6 +97,7 @@ function initNavigation() {
     const navbar = document.getElementById('navbar');
     const toggle = document.getElementById('navToggle');
     const menu = document.getElementById('navMenu');
+    const closeBtn = document.getElementById('navClose');
     const links = document.querySelectorAll('.nav-link');
 
     window.addEventListener('scroll', () => {
@@ -107,6 +108,14 @@ function initNavigation() {
         toggle.classList.toggle('open');
         menu.classList.toggle('open');
     });
+
+    // Close button handler
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            toggle.classList.remove('open');
+            menu.classList.remove('open');
+        });
+    }
 
     links.forEach(link => {
         link.addEventListener('click', () => {

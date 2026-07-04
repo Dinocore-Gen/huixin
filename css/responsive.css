@@ -43,6 +43,11 @@
 
     /* NAV: hamburger */
     .nav-toggle { display: flex; }
+    
+    /* Show close button on mobile */
+    .nav-close {
+        display: flex;
+    }
     .nav-menu {
         position: fixed;
         top: 0;
