@@ -1,0 +1,335 @@
+/* ============================================
+   HUI XIN SURPRISE — ANIMATIONS
+   All keyframe animations live here
+   ============================================ */
+
+/* ---------- FLOAT ANIMATIONS ---------- */
+@keyframes floatGentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes floatSlow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(3deg); }
+}
+
+@keyframes floatHeart {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-20px) scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* ---------- SPARKLE ANIMATIONS ---------- */
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(0.9) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(180deg);
+    }
+}
+
+@keyframes sparkleFloat {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translateY(0) scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.2);
+    }
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* ---------- HEART PULSE ---------- */
+@keyframes pulseHeart {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.15);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    75% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes pulseRing {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 102, 144, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 20px rgba(255, 102, 144, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 102, 144, 0);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+/* ---------- BOW BOB ---------- */
+@keyframes bowBob {
+    0%, 100% {
+        transform: rotate(-5deg) scale(1);
+    }
+    50% {
+        transform: rotate(5deg) scale(1.1);
+    }
+}
+
+/* ---------- EYE BLINK ---------- */
+@keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+}
+
+/* ---------- CLOUD DRIFT ---------- */
+@keyframes cloudDrift {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 200px)); }
+}
+
+/* ---------- SCROLL DOT ---------- */
+@keyframes scrollDot {
+    0%, 100% {
+        opacity: 0.3;
+        transform: translate(-50%, 0);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, 10px);
+    }
+}
+
+/* ---------- ROTATE ---------- */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ---------- SLOW ROTATE ---------- */
+@keyframes slowRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ---------- PETAL SHIMMER ---------- */
+@keyframes petalShimmer {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+}
+
+/* ---------- RISE UP ---------- */
+@keyframes riseUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- FADE IN ---------- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ---------- SCALE IN ---------- */
+@keyframes scaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ---------- SLIDE LEFT/RIGHT ---------- */
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ---------- BOUNCE ---------- */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ---------- SWING ---------- */
+@keyframes swing {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+}
+
+/* ---------- FALLING PETAL (cherry blossom) ---------- */
+@keyframes fallPetal {
+    0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+        transform: translateY(110vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fallPetal2 {
+    0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+        transform: translateY(110vh) translateX(-80px) rotate(-360deg);
+        opacity: 0;
+    }
+}
+
+/* ---------- FLOATING HEART ---------- */
+@keyframes floatHeartUp {
+    0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+    }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% {
+        transform: translateY(-10vh) scale(1);
+        opacity: 0;
+    }
+}
+
+/* ---------- BLOOM ---------- */
+@keyframes bloom {
+    0% {
+        opacity: 0;
+        transform: rotate(var(--rot)) translateY(0) scale(0);
+    }
+    60% {
+        opacity: 1;
+        transform: rotate(var(--rot)) translateY(var(--translate-y)) scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(var(--rot)) translateY(var(--translate-y)) scale(1);
+    }
+}
+
+@keyframes bloomFloat {
+    0%, 100% {
+        transform: rotate(var(--rot)) translateY(var(--translate-y)) scale(1);
+    }
+    50% {
+        transform: rotate(var(--rot)) translateY(calc(var(--translate-y) - 8px)) scale(1.02);
+    }
+}
+
+/* ---------- CONFETTI ---------- */
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ---------- TYPEWRITER CURSOR ---------- */
+@keyframes blinkCursor {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* ---------- SECTION REVEAL ---------- */
+@keyframes sectionReveal {
+    0% {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+    }
+}
+
+/* ---------- GRADIENT SHIFT ---------- */
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* ---------- RIBBON FLOAT ---------- */
+@keyframes ribbonFloat {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0) rotate(-5deg);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-10px) rotate(5deg);
+    }
+}

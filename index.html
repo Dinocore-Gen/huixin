@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Hui Xin ❤️ — A Little Surprise</title>
+    <meta name="description" content="A little surprise made especially for Hui Xin">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@300;400;500;600;700&family=Sacramento&family=Noto+Serif+SC:wght@300;400;500;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-hello-kitty">
+                <div class="hello-kitty-face">
+                    <div class="kitty-bow">🎀</div>
+                    <div class="kitty-eye left"></div>
+                    <div class="kitty-eye right"></div>
+                    <div class="kitty-nose"></div>
+                    <div class="kitty-whisker w1"></div>
+                    <div class="kitty-whisker w2"></div>
+                    <div class="kitty-whisker w3"></div>
+                    <div class="kitty-whisker w4"></div>
+                    <div class="kitty-whisker w5"></div>
+                    <div class="kitty-whisker w6"></div>
+                </div>
+            </div>
+            <p class="loading-text">Preparing your surprise...</p>
+            <p class="loading-text-cn">正在为你准备惊喜...</p>
+            <div class="loading-bar-container">
+                <div class="loading-bar" id="loadingBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="nav-heart">♥</span> Hui Xin
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero" class="nav-link">Home <span class="nav-link-cn">首页</span></a></li>
+                <li><a href="#gallery" class="nav-link">Memories <span class="nav-link-cn">回忆</span></a></li>
+                <li><a href="#amazing" class="nav-link">Amazing <span class="nav-link-cn">闪光点</span></a></li>
+                <li><a href="#little-things" class="nav-link">Little Things <span class="nav-link-cn">小事</span></a></li>
+                <li><a href="#letter" class="nav-link">Letter <span class="nav-link-cn">信</span></a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <canvas id="particlesCanvas"></canvas>
+
+    <!-- MUSIC CONTROLS -->
+    <div class="music-controls" id="musicControls">
+        <button class="music-btn" id="musicBtn" aria-label="Play Music">
+            <div class="music-bars" id="musicBarsDisplay">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        </button>
+        <div class="volume-panel" id="volumePanel">
+            <i class="fas fa-volume-up volume-icon" id="volumeIcon"></i>
+            <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+        </div>
+    </div>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music/background-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hello-kitty-bg-decoration">
+                <svg viewBox="0 0 200 200" class="kitty-svg kitty-svg-1">
+                    <ellipse cx="100" cy="110" rx="55" ry="50" fill="rgba(255,255,255,0.15)"/>
+                    <circle cx="75" cy="75" r="20" fill="rgba(255,255,255,0.12)"/>
+                    <circle cx="125" cy="75" r="20" fill="rgba(255,255,255,0.12)"/>
+                    <path d="M80 110 Q90 125 100 115 Q110 125 120 110" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none"/>
+                    <path d="M135 70 L150 60 L148 80 Z" fill="rgba(255,105,140,0.2)"/>
+                </svg>
+                <svg viewBox="0 0 200 200" class="kitty-svg kitty-svg-2">
+                    <ellipse cx="100" cy="110" rx="55" ry="50" fill="rgba(255,255,255,0.15)"/>
+                    <circle cx="75" cy="75" r="20" fill="rgba(255,255,255,0.12)"/>
+                    <circle cx="125" cy="75" r="20" fill="rgba(255,255,255,0.12)"/>
+                    <path d="M80 110 Q90 125 100 115 Q110 125 120 110" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none"/>
+                    <path d="M135 70 L150 60 L148 80 Z" fill="rgba(255,105,140,0.2)"/>
+                </svg>
+            </div>
+            <div class="floating-clouds">
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="cloud cloud-3"></div>
+            </div>
+        </div>
+
+        <div class="hero-content" data-aos="zoom-in" data-aos-duration="1500">
+            <div class="hero-ribbon">✦</div>
+            <p class="hero-subtitle">A Little Surprise ✧</p>
+            <p class="hero-subtitle-cn">一份小小的惊喜 ✧</p>
+            <h1 class="hero-title">
+                <span class="hero-greeting">Hello,</span>
+                <span class="hero-greeting-cn">你好，</span>
+                <span class="hero-name">Hui Xin</span>
+            </h1>
+            <p class="hero-message">
+                I made a little surprise for you<br>
+                I hope you like it <span class="heart-icon">❤️</span>
+            </p>
+            <p class="hero-message-cn">
+                我为你准备了一个小惊喜<br>
+                希望你会喜欢 <span class="heart-icon">❤️</span>
+            </p>
+            <button class="cta-button" id="ctaButton">
+                <span class="cta-text">Open the Surprise</span>
+                <span class="cta-text-cn">打开惊喜</span>
+                <span class="cta-sparkle sparkle-1">✦</span>
+                <span class="cta-sparkle sparkle-2"></span>
+                <span class="cta-sparkle sparkle-3">✦</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- SECTION 1 — SPECIAL -->
+    <section class="section special-section" id="special">
+        <div class="section-container">
+            <div class="section-decoration deco-top">
+                <span class="deco-star">✧</span>
+                <span class="deco-heart">♡</span>
+                <span class="deco-star"></span>
+            </div>
+
+            <div class="special-content" data-aos="fade-up" data-aos-duration="1200">
+                <div class="special-illustration">
+                    <div class="illustration-frame">
+                        <div class="illustration-inner">
+                            <div class="cute-kitty-art">
+                                <div class="art-kitty-face">
+                                    <div class="art-ear left"></div>
+                                    <div class="art-ear right"></div>
+                                    <div class="art-face-oval">
+                                        <div class="art-eye left"></div>
+                                        <div class="art-eye right"></div>
+                                        <div class="art-nose"></div>
+                                        <div class="art-mouth"></div>
+                                        <div class="art-whisker l1"></div>
+                                        <div class="art-whisker l2"></div>
+                                        <div class="art-whisker l3"></div>
+                                        <div class="art-whisker r1"></div>
+                                        <div class="art-whisker r2"></div>
+                                        <div class="art-whisker r3"></div>
+                                        <div class="art-bow">🎀</div>
+                                    </div>
+                                </div>
+                                <div class="art-hearts">
+                                    <span class="art-heart h1">♥</span>
+                                    <span class="art-heart h2">♥</span>
+                                    <span class="art-heart h3">♥</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="frame-glow"></div>
+                    </div>
+                </div>
+
+                <div class="special-text">
+                    <h2 class="section-title">For Someone Truly Special</h2>
+                    <h3 class="section-title-cn">给最特别的你</h3>
+                    <p class="section-subtitle">
+                        There isn't a special occasion today,<br>
+                        I simply wanted to remind you how <em>amazing</em> you are.
+                    </p>
+                    <p class="section-subtitle-cn">
+                        今天没有什么特别的理由，<br>
+                        我只是想提醒你，你是多么<em>美好</em>的人。
+                    </p>
+                    <a href="#gallery" class="explore-btn">
+                        <span>Explore Memories</span>
+                        <span class="explore-btn-cn">探索回忆</span>
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="section-decoration deco-bottom">
+                <span class="deco-star">✧</span>
+                <span class="deco-heart">♡</span>
+                <span class="deco-star">✧</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2 — GALLERY -->
+    <section class="section gallery-section" id="gallery">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">✦ Memories ✦</span>
+                <span class="section-label-cn">✦ 回忆 ✦</span>
+                <h2 class="section-title">Moments that Brighten the World</h2>
+                <h3 class="section-title-cn">照亮世界的瞬间</h3>
+                <p class="section-subtitle">
+                    Every single photo reveals a piece of your wonderful personality —<br>
+                    whether you're being cute, thoughtful, playful, or simply <em>yourself</em>.
+                </p>
+                <p class="section-subtitle-cn">
+                    每一张照片都展现了你美好个性的一面——<br>
+                    无论是可爱、温柔、俏皮，还是就做<em>你自己</em>。
+                </p>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+
+        <!-- Gallery Modal -->
+        <div class="gallery-modal" id="galleryModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <button class="modal-close" id="modalClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-image-wrap">
+                    <img id="modalImage" src="" alt="">
+                </div>
+                <div class="modal-message-area">
+                    <div class="modal-message-photo-label" id="modalPhotoLabel"></div>
+                    <div class="modal-message" id="modalMessage"></div>
+                    <div class="modal-message-cn" id="modalMessageCn"></div>
+                </div>
+                <div class="modal-nav">
+                    <button class="modal-nav-btn" id="modalPrev"><i class="fas fa-chevron-left"></i></button>
+                    <span class="modal-counter" id="modalCounter"></span>
+                    <button class="modal-nav-btn" id="modalNext"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3 — AMAZING -->
+    <section class="section amazing-section" id="amazing">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">✦ Just For You ✦</span>
+                <span class="section-label-cn">✦ 只给你 ✦</span>
+                <h2 class="section-title">Why You're Amazing</h2>
+                <h3 class="section-title-cn">你为什么那么棒</h3>
+                <p class="section-subtitle">
+                    Hover or tap each card to discover little truths<br>
+                    about what makes you unforgettable.
+                </p>
+                <p class="section-subtitle-cn">
+                     hover 或点击每张卡片，发现让你如此难忘的小秘密。
+                </p>
+            </div>
+
+            <div class="amazing-grid" id="amazingGrid"></div>
+        </div>
+    </section>
+
+    <!-- SECTION 4 — TIMELINE -->
+    <section class="section little-things-section" id="little-things">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">✦ Little Things ✦</span>
+                <span class="section-label-cn">✦ 那些小事 ✦</span>
+                <h2 class="section-title">The Little Things</h2>
+                <h3 class="section-title-cn">那些小事</h3>
+                <p class="section-subtitle">
+                    It is never one big thing;<br>
+                    it is the countless small ways you touch the hearts of those around you.
+                </p>
+                <p class="section-subtitle-cn">
+                    从来不是一件大事；<br>
+                    而是你无数种触碰身边人心灵的小方式。
+                </p>
+            </div>
+
+            <div class="timeline" id="timeline"></div>
+        </div>
+    </section>
+
+    <!-- SECTION 5 — LETTER -->
+    <section class="section letter-section" id="letter">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">✦ Words from the Heart ✦</span>
+                <span class="section-label-cn">✦ 心里话 ✦</span>
+                <h2 class="section-title">A Heartfelt Note</h2>
+                <h3 class="section-title-cn">一封真心话</h3>
+                <p class="section-subtitle">
+                    Take a moment to read this message written just for you.
+                </p>
+                <p class="section-subtitle-cn">
+                    花一点时间，读读这封只写给你的信。
+                </p>
+            </div>
+
+            <div class="letter-container" data-aos="fade-up" data-aos-duration="1500">
+                <div class="letter-ribbon">🎀</div>
+                <div class="letter">
+                    <div class="letter-header">
+                        <span class="letter-date">with love ♥ 带着爱</span>
+                    </div>
+                    <div class="letter-body" id="letterBody">
+                        <!-- Typewriter animation via JS -->
+                    </div>
+                    <div class="letter-signature">
+                        <span class="signature-heart">♥</span>
+                        <span class="signature-text">forever yours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-hearts">
+                <span>♡</span><span>♥</span><span>♡</span><span>♥</span><span>♡</span>
+            </div>
+            <p class="footer-text">
+                Made with <span class="footer-heart">❤️</span> especially for <strong>Hui Xin</strong>
+            </p>
+            <p class="footer-text-cn">
+                用 <span class="footer-heart">❤️</span> 专门为 <strong>Hui Xin</strong> 制作
+            </p>
+            <p class="footer-small">✦ A little surprise that will always be here ✦</p>
+            <p class="footer-small-cn"> 一份永远在这里的小惊喜 ✦</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script src="js/script.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/music.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!-- Hello Kitty silhouette decoration - SVG -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+    <!-- Ears -->
+    <path d="M45 75 L60 40 L80 65 Z" fill="white" stroke="#ff9ec0" stroke-width="1.5"/>
+    <path d="M155 75 L140 40 L120 65 Z" fill="white" stroke="#ff9ec0" stroke-width="1.5"/>
+    <!-- Inner ears -->
+    <path d="M55 70 L63 50 L73 65 Z" fill="#ffc4d6"/>
+    <path d="M145 70 L137 50 L127 65 Z" fill="#ffc4d6"/>
+    <!-- Face -->
+    <ellipse cx="100" cy="110" rx="65" ry="55" fill="white" stroke="#ff9ec0" stroke-width="1.5"/>
+    <!-- Eyes -->
+    <ellipse cx="75" cy="100" rx="5" ry="7" fill="#4a2c3d"/>
+    <ellipse cx="125" cy="100" rx="5" ry="7" fill="#4a2c3d"/>
+    <!-- Nose -->
+    <ellipse cx="100" cy="115" rx="4" ry="3" fill="#ff9ec0"/>
+    <!-- Mouth -->
+    <path d="M90 125 Q100 132 110 125" stroke="#4a2c3d" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <!-- Whiskers left -->
+    <line x1="30" y1="110" x2="60" y2="115" stroke="#4a2c3d" stroke-width="1" stroke-linecap="round"/>
+    <line x1="28" y1="125" x2="60" y2="125" stroke="#4a2c3d" stroke-width="1" stroke-linecap="round"/>
+    <line x1="30" y1="140" x2="60" y2="135" stroke="#4a2c3d" stroke-width="1" stroke-linecap="round"/>
+    <!-- Whiskers right -->
+    <line x1="170" y1="110" x2="140" y2="115" stroke="#4a2c3d" stroke-width="1" stroke-linecap="round"/>
+    <line x1="172" y1="125" x2="140" y2="125" stroke="#4a2c3d" stroke-width="1" stroke-linecap="round"/>
+    <line x1="170" y1="140" x2="140" y2="135" stroke="#4a2c3d" stroke-width="1" stroke-linecap="round"/>
+    <!-- Bow -->
+    <circle cx="140" cy="55" r="8" fill="#ff6690"/>
+    <ellipse cx="128" cy="52" rx="10" ry="7" fill="#ff6690" transform="rotate(-20 128 52)"/>
+    <ellipse cx="152" cy="52" rx="10" ry="7" fill="#ff6690" transform="rotate(20 152 52)"/>
+    <circle cx="140" cy="55" r="4" fill="#ff9ec0"/>
+</svg>
