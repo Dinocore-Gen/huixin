@@ -1008,7 +1008,7 @@ body:hover .cursor-glow { opacity: 1; }
     justify-content: center;
 }
 
-/* Fixed size gallery items - works on ALL browsers */
+/* Fixed size - simple and works on ALL browsers */
 .gallery-item {
     position: relative;
     border-radius: var(--radius-lg);
@@ -1031,11 +1031,8 @@ body:hover .cursor-glow { opacity: 1; }
     transform: scale(0.97);
 }
 
-/* Image fills container */
+/* Image fills container - NO position absolute */
 .gallery-item img {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1045,6 +1042,7 @@ body:hover .cursor-glow { opacity: 1; }
 
 .gallery-item:hover img { transform: scale(1.08); }
 
+/* Overlay gradient on top of image */
 .gallery-item::before {
     content: '';
     position: absolute;
