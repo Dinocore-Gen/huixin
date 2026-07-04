@@ -981,6 +981,11 @@ body:hover .cursor-glow { opacity: 1; }
     gap: 1.5rem;
 }
 
+/* 
+  BULLETPROOF aspect ratio using padding-bottom technique.
+  Works on EVERY browser - no @supports needed.
+  padding-bottom creates the height, img absolutely fills it.
+*/
 .gallery-item {
     position: relative;
     border-radius: var(--radius-lg);
@@ -989,18 +994,10 @@ body:hover .cursor-glow { opacity: 1; }
     box-shadow: var(--shadow-sm);
     transition: all 0.5s var(--ease-out);
     background: var(--pink-100);
-    /* Fallback for browsers that don't support aspect-ratio */
-    padding-top: 133.33%;
     height: 0;
-}
-
-/* Modern browsers with aspect-ratio support */
-@supports (aspect-ratio: 3/4) {
-    .gallery-item {
-        padding-top: 0;
-        height: auto;
-        aspect-ratio: 3 / 4;
-    }
+    padding-bottom: 133.333%;
+    /* Ensure minimum size on very narrow screens */
+    min-height: 150px;
 }
 
 .gallery-item:hover {
@@ -1008,19 +1005,19 @@ body:hover .cursor-glow { opacity: 1; }
     box-shadow: var(--shadow-lg);
 }
 
-/* Active state for mobile tap feedback */
 .gallery-item:active {
     transform: scale(0.97);
 }
 
+/* Image absolutely fills the container */
 .gallery-item img {
     position: absolute;
     top: 0;
     left: 0;
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
     transition: transform 0.8s var(--ease-out);
 }
 
@@ -1037,11 +1034,10 @@ body:hover .cursor-glow { opacity: 1; }
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
+    z-index: 1;
 }
 
 .gallery-item:hover::before { opacity: 1; }
-
-/* Show gradient on mobile via a class toggled by JS */
 .gallery-item.show-overlay::before { opacity: 1; }
 
 .gallery-item-overlay {
@@ -1054,11 +1050,10 @@ body:hover .cursor-glow { opacity: 1; }
     transform: translateY(100%);
     transition: transform 0.5s var(--ease-out);
     pointer-events: none;
+    z-index: 2;
 }
 
 .gallery-item:hover .gallery-item-overlay { transform: translateY(0); }
-
-/* Mobile: show overlay on tap */
 .gallery-item.show-overlay .gallery-item-overlay { transform: translateY(0); }
 
 .gallery-item-number {
@@ -1162,17 +1157,24 @@ body:hover .cursor-glow { opacity: 1; }
 
 .modal-image-wrap {
     width: 100%;
-    aspect-ratio: 3/4;
+    /* aspect-ratio for modal image */
+    aspect-ratio: 3 / 4;
+    min-height: 200px;
     max-height: 60vh;
     overflow: hidden;
     background: var(--pink-50);
     flex-shrink: 0;
+    position: relative;
 }
 
 .modal-image-wrap img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .modal-message-area {
@@ -1266,8 +1268,11 @@ body:hover .cursor-glow { opacity: 1; }
 .amazing-card {
     position: relative;
     min-height: 300px;
+    height: 300px;
     perspective: 1000px;
     cursor: pointer;
+    /* Ensure cards are visible */
+    display: block;
 }
 
 .card-inner {
