@@ -1738,3 +1738,40 @@ body:hover .cursor-glow { opacity: 1; }
     transform: translateY(-4px) scale(1.1);
     background: white;
 }
+
+
+/* ---------- MOBILE PERFORMANCE HELPERS ---------- */
+.section,
+.gallery-item,
+.amazing-card,
+.timeline-content,
+.letter {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.gallery-item img,
+.modal-image-wrap img {
+    content-visibility: auto;
+}
+
+@media (max-width: 900px), (pointer: coarse) {
+    html { scroll-padding-top: 72px; }
+    body { overscroll-behavior-y: contain; }
+
+    .gallery-item,
+    .amazing-card,
+    .timeline-content,
+    .letter-container {
+        contain: layout paint;
+    }
+
+    .gallery-item:hover,
+    .timeline-content:hover,
+    .amazing-card:hover .card-icon,
+    .cta-button:hover,
+    .explore-btn:hover,
+    .back-to-top:hover,
+    .music-btn:hover {
+        transform: none;
+    }
+}

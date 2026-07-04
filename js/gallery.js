@@ -310,7 +310,7 @@ function initGallery() {
 
     grid.innerHTML = galleryPhotos.map((photo, i) => `
         <div class="gallery-item" data-index="${i}" data-aos="fade-up" data-aos-delay="${(i % 6) * 60}">
-            <img src="${photo.src}" alt="Memory ${i + 1}" loading="lazy">
+            <img src="${photo.src}" alt="Memory ${i + 1}" loading="lazy" decoding="async">
             <div class="gallery-item-overlay">
                 <div class="gallery-item-number">✦ ${String(i + 1).padStart(2, '0')} ✦</div>
                 <div class="gallery-item-title">${photo.short}</div>
@@ -389,6 +389,10 @@ function initGallery() {
                 msgArea.style.opacity = '1';
             }, 150);
         }
+    }
+
+    if (typeof window.refreshSmoothReveals === 'function') {
+        window.refreshSmoothReveals();
     }
 
     grid.querySelectorAll('.gallery-item').forEach(item => {

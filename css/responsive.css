@@ -94,18 +94,6 @@
     .section-subtitle { font-size: 0.9rem; }
     .section-subtitle-cn { font-size: 0.8rem; }
 
-    /* MOBILE VISIBILITY SAFETY NET
-       AOS CSS can hide [data-aos] elements on phones before JS marks them animated.
-       These sections must always be visible on non-desktop/mobile mode. */
-    .gallery-grid [data-aos],
-    .amazing-grid [data-aos],
-    .timeline [data-aos] {
-        opacity: 1 !important;
-        transform: none !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
-    }
-
     /* GALLERY - stable mobile layout */
     .gallery-grid {
         gap: 1rem;
@@ -361,16 +349,57 @@
 }
 
 
-/* Final mobile content visibility fallback: prevents external AOS CSS from hiding key cards/photos. */
-@media (max-width: 768px), (pointer: coarse) {
-    #galleryGrid .gallery-item,
-    #amazingGrid .amazing-card,
-    #timeline .timeline-item,
-    #galleryGrid [data-aos],
-    #amazingGrid [data-aos],
-    #timeline [data-aos] {
+/* Lightweight mobile scroll animation system.
+   Default remains visible; only JS adds .smooth-reveal-ready before hiding/revealing. */
+@media (max-width: 900px), (pointer: coarse) {
+    body.smooth-reveal-ready .reveal-item {
+        opacity: 0 !important;
+        transform: translate3d(0, 26px, 0) scale(0.985) !important;
+        transition:
+            opacity 560ms cubic-bezier(0.16, 1, 0.3, 1),
+            transform 560ms cubic-bezier(0.16, 1, 0.3, 1),
+            box-shadow 280ms ease !important;
+        transition-delay: var(--reveal-delay, 0ms) !important;
+        will-change: opacity, transform;
+    }
+
+    body.smooth-reveal-ready .reveal-item.is-visible {
+        opacity: 1 !important;
+        transform: translate3d(0, 0, 0) scale(1) !important;
+    }
+
+    body.smooth-reveal-ready .section-header.reveal-item {
+        transform: translate3d(0, 18px, 0) !important;
+    }
+
+    body.smooth-reveal-ready .section-header.reveal-item.is-visible {
+        transform: translate3d(0, 0, 0) !important;
+    }
+
+    body.smooth-reveal-ready .timeline-item.reveal-item {
+        transform: translate3d(18px, 20px, 0) !important;
+    }
+
+    body.smooth-reveal-ready .timeline-item.reveal-item.is-visible {
+        transform: translate3d(0, 0, 0) !important;
+    }
+
+    .gallery-item,
+    .amazing-card,
+    .timeline-content,
+    .letter,
+    .section-header {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-item,
+    .reveal-item.is-visible {
         opacity: 1 !important;
         transform: none !important;
-        visibility: visible !important;
+        transition: none !important;
     }
 }

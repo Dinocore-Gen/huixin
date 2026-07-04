@@ -5,15 +5,16 @@
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (typeof AOS !== 'undefined') {
-        // Keep AOS enabled on mobile. Disabling it while the AOS stylesheet is loaded
-        // can leave [data-aos] elements at opacity: 0 on real phones, which hides
-        // the Moments photos, Amazing cards, and Little Things cards.
+    const useMobileReveal = window.matchMedia('(max-width: 900px), (pointer: coarse)').matches;
+
+    // Desktop can use AOS. Mobile uses our own light IntersectionObserver reveal
+    // so cards/photos animate smoothly without the AOS mobile opacity bug/jank.
+    if (typeof AOS !== 'undefined' && !useMobileReveal) {
         AOS.init({
-            duration: window.innerWidth <= 768 ? 650 : 1000,
+            duration: 900,
             easing: 'ease-out-cubic',
             once: true,
-            offset: window.innerWidth <= 768 ? 20 : 80,
+            offset: 80,
             disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
         });
     }
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initLetterTypewriter();
     initCTAButton();
     initMobileGalleryTap();
+    initOptimizedScrollReveals();
 });
 
 /* ---------- LOADING ---------- */
@@ -103,9 +105,15 @@ function initNavigation() {
     const closeBtn = document.getElementById('navClose');
     const links = document.querySelectorAll('.nav-link');
 
+    let navTicking = false;
     window.addEventListener('scroll', () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 80);
-    });
+        if (navTicking) return;
+        navTicking = true;
+        requestAnimationFrame(() => {
+            navbar.classList.toggle('scrolled', window.scrollY > 80);
+            navTicking = false;
+        });
+    }, { passive: true });
 
     toggle.addEventListener('click', () => {
         toggle.classList.toggle('open');
@@ -139,19 +147,31 @@ function initNavigation() {
 function initScrollProgress() {
     const bar = document.getElementById('scrollProgress');
     if (!bar) return;
+    let ticking = false;
     window.addEventListener('scroll', () => {
-        const h = document.documentElement.scrollHeight - window.innerHeight;
-        bar.style.width = (window.scrollY / h) * 100 + '%';
-    });
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            const h = document.documentElement.scrollHeight - window.innerHeight;
+            bar.style.width = h > 0 ? (window.scrollY / h) * 100 + '%' : '0%';
+            ticking = false;
+        });
+    }, { passive: true });
 }
 
 /* ---------- BACK TO TOP ---------- */
 function initBackToTop() {
     const btn = document.getElementById('backToTop');
     if (!btn) return;
+    let ticking = false;
     window.addEventListener('scroll', () => {
-        btn.classList.toggle('visible', window.scrollY > 600);
-    });
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            btn.classList.toggle('visible', window.scrollY > 600);
+            ticking = false;
+        });
+    }, { passive: true });
     btn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -171,13 +191,19 @@ function initParticles() {
         height = canvas.height = window.innerHeight;
     }
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', resize, { passive: true });
 
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+        canvas.style.display = 'none';
+        return;
+    }
     const counts = {
-        petal: isMobile ? 12 : 25,
-        heart: isMobile ? 4 : 8,
-        sparkle: isMobile ? 8 : 18
+        // Keep a few soft particles on phones, but reduce enough to avoid scroll jank.
+        petal: isMobile ? 6 : 25,
+        heart: isMobile ? 2 : 8,
+        sparkle: isMobile ? 4 : 18
     };
 
     class Particle {
@@ -255,9 +281,16 @@ function initParticles() {
     for (let i = 0; i < counts.heart; i++) { const p = new Particle('heart'); p.y = Math.random() * height; particles.push(p); }
     for (let i = 0; i < counts.sparkle; i++) { const p = new Particle('sparkle'); p.x = Math.random() * width; particles.push(p); }
 
+    let particlesPaused = false;
+    document.addEventListener('visibilitychange', () => {
+        particlesPaused = document.hidden;
+    });
+
     function animate() {
-        ctx.clearRect(0, 0, width, height);
-        particles.forEach(p => { p.update(); p.draw(); });
+        if (!particlesPaused) {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => { p.update(); p.draw(); });
+        }
         requestAnimationFrame(animate);
     }
     animate();
@@ -522,6 +555,91 @@ function initMobileGalleryTap() {
             item.classList.add('show-overlay');
         }
     }, { passive: true });
+}
+
+
+/* ---------- OPTIMIZED MOBILE SCROLL REVEALS ---------- */
+function initOptimizedScrollReveals() {
+    const useMobileReveal = window.matchMedia('(max-width: 900px), (pointer: coarse)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Desktop keeps AOS; mobile gets lightweight transform/opacity reveals.
+    if (!useMobileReveal || reduceMotion) {
+        if (reduceMotion) document.body.classList.add('reveal-no-motion');
+        return;
+    }
+
+    document.body.classList.add('smooth-reveal-ready');
+
+    const revealSelectors = [
+        '.section-header',
+        '.special-content',
+        '.gallery-item',
+        '.amazing-card',
+        '.timeline-item',
+        '.letter-container',
+        '.footer-content'
+    ].join(',');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -8% 0px'
+    });
+
+    function prepareReveals(scope = document) {
+        const elements = [...scope.querySelectorAll(revealSelectors)]
+            .filter(el => !el.classList.contains('reveal-item'));
+
+        elements.forEach((el, index) => {
+            // Remove AOS attributes on mobile so the external AOS CSS cannot keep items hidden.
+            if (el.hasAttribute('data-aos')) {
+                el.removeAttribute('data-aos');
+                el.removeAttribute('data-aos-delay');
+                el.removeAttribute('data-aos-duration');
+            }
+
+            el.classList.add('reveal-item');
+
+            // Small repeating stagger per group: smooth but not slow.
+            const groupIndex = [...(el.parentElement?.children || [])].indexOf(el);
+            const delay = Math.max(0, Math.min((groupIndex % 6) * 55, 275));
+            el.style.setProperty('--reveal-delay', `${delay}ms`);
+
+            // If already near the top of the viewport, show quickly to avoid blank first paint.
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+                requestAnimationFrame(() => el.classList.add('is-visible'));
+            } else {
+                observer.observe(el);
+            }
+        });
+    }
+
+    prepareReveals();
+
+    // Gallery and cards are injected after DOMContentLoaded, so watch for new nodes once.
+    const mutationObserver = new MutationObserver((mutations) => {
+        let shouldPrepare = false;
+        for (const mutation of mutations) {
+            if (mutation.addedNodes.length) {
+                shouldPrepare = true;
+                break;
+            }
+        }
+        if (shouldPrepare) requestAnimationFrame(() => prepareReveals());
+    });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    // Expose a tiny refresh hook for dynamically injected content.
+    window.refreshSmoothReveals = () => requestAnimationFrame(() => prepareReveals());
 }
 
 /* ---------- GSAP PARALLAX ---------- */
