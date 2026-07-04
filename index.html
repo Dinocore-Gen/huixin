@@ -7,22 +7,28 @@
     <title>For Hui Xin ❤️ — A Little Surprise</title>
     <meta name="description" content="A little surprise made especially for Hui Xin">
 
+    <!-- Google Fonts: English + Chinese -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@300;400;500;600;700&family=Sacramento&family=Noto+Serif+SC:wght@300;400;500;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS Animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
+    <!-- Custom Cursor Glow (desktop only) -->
     <div class="cursor-glow" id="cursorGlow"></div>
 
-    <!-- LOADING SCREEN -->
+    <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <div class="loading-hello-kitty">
@@ -47,19 +53,20 @@
         </div>
     </div>
 
+    <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- NAVIGATION -->
+    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#hero" class="nav-logo">
                 <span class="nav-heart">♥</span> Hui Xin
             </a>
-        <ul class="nav-menu" id="navMenu">
-            <button class="nav-close" id="navClose" aria-label="Close menu">
-                <i class="fas fa-times"></i>
-            </button>
-            <li><a href="#hero" class="nav-link">Home <span class="nav-link-cn">首页</span></a></li>
+            <ul class="nav-menu" id="navMenu">
+                <button class="nav-close" id="navClose" aria-label="Close menu">
+                    <i class="fas fa-times"></i>
+                </button>
+                <li><a href="#hero" class="nav-link">Home <span class="nav-link-cn">首页</span></a></li>
                 <li><a href="#gallery" class="nav-link">Memories <span class="nav-link-cn">回忆</span></a></li>
                 <li><a href="#amazing" class="nav-link">Amazing <span class="nav-link-cn">闪光点</span></a></li>
                 <li><a href="#little-things" class="nav-link">Little Things <span class="nav-link-cn">小事</span></a></li>
@@ -71,9 +78,10 @@
         </div>
     </nav>
 
+    <!-- Floating Particles Canvas -->
     <canvas id="particlesCanvas"></canvas>
 
-    <!-- MUSIC CONTROLS -->
+    <!-- Music Controls -->
     <div class="music-controls" id="musicControls">
         <button class="music-btn" id="musicBtn" aria-label="Play Music">
             <div class="music-bars" id="musicBarsDisplay">
@@ -89,7 +97,7 @@
         <source src="music/background-music.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <section class="hero" id="hero">
         <div class="hero-bg">
             <div class="hero-gradient"></div>
@@ -143,13 +151,13 @@
         </div>
     </section>
 
-    <!-- SECTION 1 — SPECIAL -->
+    <!-- SECTION 1: SPECIAL -->
     <section class="section special-section" id="special">
         <div class="section-container">
             <div class="section-decoration deco-top">
                 <span class="deco-star">✧</span>
                 <span class="deco-heart">♡</span>
-                <span class="deco-star"></span>
+                <span class="deco-star">✧</span>
             </div>
 
             <div class="special-content" data-aos="fade-up" data-aos-duration="1200">
@@ -207,12 +215,12 @@
             <div class="section-decoration deco-bottom">
                 <span class="deco-star">✧</span>
                 <span class="deco-heart">♡</span>
-                <span class="deco-star">✧</span>
+                <span class="deco-star"></span>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2 — GALLERY -->
+    <!-- SECTION 2: GALLERY -->
     <section class="section gallery-section" id="gallery">
         <div class="section-container">
             <div class="section-header" data-aos="fade-up">
@@ -257,11 +265,11 @@
         </div>
     </section>
 
-    <!-- SECTION 3 — AMAZING -->
+    <!-- SECTION 3: AMAZING CARDS -->
     <section class="section amazing-section" id="amazing">
         <div class="section-container">
             <div class="section-header" data-aos="fade-up">
-                <span class="section-label">✦ Just For You ✦</span>
+                <span class="section-label">✦ Just For You </span>
                 <span class="section-label-cn">✦ 只给你 ✦</span>
                 <h2 class="section-title">Why You're Amazing</h2>
                 <h3 class="section-title-cn">你为什么那么棒</h3>
@@ -270,7 +278,7 @@
                     about what makes you unforgettable.
                 </p>
                 <p class="section-subtitle-cn">
-                     hover 或点击每张卡片，发现让你如此难忘的小秘密。
+                    hover 或点击每张卡片，发现让你如此难忘的小秘密。
                 </p>
             </div>
 
@@ -278,7 +286,7 @@
         </div>
     </section>
 
-    <!-- SECTION 4 — TIMELINE -->
+    <!-- SECTION 4: TIMELINE -->
     <section class="section little-things-section" id="little-things">
         <div class="section-container">
             <div class="section-header" data-aos="fade-up">
@@ -300,7 +308,7 @@
         </div>
     </section>
 
-    <!-- SECTION 5 — LETTER -->
+    <!-- SECTION 5: LETTER -->
     <section class="section letter-section" id="letter">
         <div class="section-container">
             <div class="section-header" data-aos="fade-up">
@@ -322,9 +330,7 @@
                     <div class="letter-header">
                         <span class="letter-date">with love ♥ 带着爱</span>
                     </div>
-                    <div class="letter-body" id="letterBody">
-                        <!-- Typewriter animation via JS -->
-                    </div>
+                    <div class="letter-body" id="letterBody"></div>
                     <div class="letter-signature">
                         <span class="signature-heart">♥</span>
                         <span class="signature-text">forever yours</span>
@@ -347,18 +353,21 @@
                 用 <span class="footer-heart">❤️</span> 专门为 <strong>Hui Xin</strong> 制作
             </p>
             <p class="footer-small">✦ A little surprise that will always be here ✦</p>
-            <p class="footer-small-cn"> 一份永远在这里的小惊喜 ✦</p>
+            <p class="footer-small-cn">✦ 一份永远在这里的小惊喜 </p>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
+    <!-- Custom Scripts -->
     <script src="js/script.js"></script>
     <script src="js/gallery.js"></script>
     <script src="js/music.js"></script>
