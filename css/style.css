@@ -1002,12 +1002,13 @@ body:hover .cursor-glow { opacity: 1; }
 }
 
 .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
+    justify-content: center;
 }
 
-/* Simple aspect-ratio - works on all modern mobile browsers */
+/* Fixed size gallery items - works on ALL browsers */
 .gallery-item {
     position: relative;
     border-radius: var(--radius-lg);
@@ -1016,9 +1017,9 @@ body:hover .cursor-glow { opacity: 1; }
     box-shadow: var(--shadow-sm);
     transition: all 0.5s var(--ease-out);
     background: var(--pink-100);
-    aspect-ratio: 3 / 4;
-    /* Ensure content is visible */
-    display: block;
+    width: 280px;
+    height: 360px;
+    flex-shrink: 0;
 }
 
 .gallery-item:hover {
@@ -1281,18 +1282,19 @@ body:hover .cursor-glow { opacity: 1; }
 }
 
 .amazing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
+    justify-content: center;
 }
 
 .amazing-card {
     position: relative;
-    min-height: 300px;
+    width: 280px;
     height: 300px;
     perspective: 1000px;
     cursor: pointer;
-    display: block;
+    flex-shrink: 0;
 }
 
 .card-inner {
